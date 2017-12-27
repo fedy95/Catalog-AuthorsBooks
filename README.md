@@ -7,7 +7,8 @@ Used software:
 - [complete css from bootstrap cdn v3.3.6](https://www.bootstrapcdn.com/).
 
 Problem:
-- ![problem](https://github.com/fedy95/Catalog-AuthorsBooks/blob/master/_UML-Diagrams/UseCase%20(detailed).jpg)
+
+![problem](https://github.com/fedy95/Catalog-AuthorsBooks/blob/master/_UML-Diagrams/UseCase%20(detailed).jpg)
 
 Helpful links:
 - [Symfony 3.4.2 original documentation](https://symfony.com/doc/3.4/index.html);
