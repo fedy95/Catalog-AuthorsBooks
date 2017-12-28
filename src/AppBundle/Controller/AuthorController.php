@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AuthorController extends Controller{
     /**
-     * @Route("/author", name="author_list")
+     * @Route("/author/index", name="author_list")
      */
     public function indexAction(Request $request){
         return $this->render('author/index.html.twig');

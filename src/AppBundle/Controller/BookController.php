@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BookController extends Controller{
     /**
-     * @Route("/book", name="book_list")
+     * @Route("/book/index", name="book_list")
      */
     public function indexAction(Request $request){
         return $this->render('book/index.html.twig');
