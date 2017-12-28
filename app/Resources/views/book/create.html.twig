@@ -1,5 +1,63 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    BOOK CREATE
+    <div class="well well-lg">
+        <h4><strong>Обязательная информация о новом произведении</strong></h4>
+        <br>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Название</label>
+                <div class="col-sm-5">
+                    <input class="form-control" id="inputName" placeholder="Война и мир">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="inputFile">Загрузите произведение</label>
+                <div class="col-sm-5">
+                    <br>
+                    <input type="file" id="exampleInputFile">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="well well-lg">
+        <h4><strong>Дополнительная информация о новом произведении</strong></h4>
+        <br>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Выберете автора</label>
+                <div class="col-sm-5">
+                    <select class="form-control">
+                        <option>link</option>
+                    </select>
+                </div>
+            </div>
+            <div class="alert alert-success" role="alert">
+                <b>Не нашли автора произвдения в каталоге?
+                <br>
+                <a href="/author/create">Добавьте</a> его!</b>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Количество страниц</label>
+                <div class="col-sm-5">
+                    <input class="form-control" id="inputNumberOfPages" placeholder="1274">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Год публикации</label>
+                <div class="col-sm-5">
+                    <input class="form-control" id="inputYearOfPublication" placeholder="2017">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">ISBN</label>
+                <div class="col-sm-5">
+                    <input class="form-control" id="inputISBN" placeholder="978-5-4472-3750-9">
+                </div>
+            </div>
+        </form>
+    </div>
+    <a href="/book/success" class="btn btn-success">Добавить произвдение</a>
+
 {% endblock %}
