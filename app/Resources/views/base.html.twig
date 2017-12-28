@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Авторы и книги{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -28,13 +28,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Catalog authors and books</a>
+            <a class="navbar-brand" href="/">Каталог авторов и книг</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/book/create">Add new Book</a></li>
-                <li><a href="/author/create">Add new Author</a></li>
+                {#<li><a href="/book/create">Add new Book</a></li>#}
+                {#<li><a href="/author/create">Add new Author</a></li>#}
+                <li><a href="/book/index">Произведения</a></li>
+                <li><a href="/author/index">Авторы</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
