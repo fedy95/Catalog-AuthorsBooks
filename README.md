@@ -4,7 +4,8 @@ PHP symfony framework tested
 Used software:
 - Symfony 3.4.2;
 - [bootstrap template](https://getbootstrap.com/docs/3.3/examples/starter-template/);
-- [complete css from bootstrap cdn v3.3.6](https://www.bootstrapcdn.com/).
+- [complete css from bootstrap cdn v3.3.6](https://www.bootstrapcdn.com/);
+- [css Bootstrap](http://getbootstrap.com/docs/3.3/css/).
 
 Problem:
 
