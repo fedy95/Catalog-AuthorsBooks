@@ -1,5 +1,72 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    AUTHOR INDEX
+    <h3>Авторы в каталоге</h3>
+    <br>
+
+    <a href="/author/create" class="btn btn-success">Добавить автора</a>
+    <br>
+    <br>
+
+    <form class="form-inline">
+        <input type="text" class="form-control" placeholder="Поиск по автору">
+        <a href="/book/index/1" class="btn btn-default">Поиск</a>
+    </form>
+
+    <div class="bs-example" data-example-id="striped-table">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Фамилия И.О.</th>
+                <th>Произвдения</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@fat</td>
+                <td>@fat</td>
+                <td>1</td>
+                <td>
+                    <a href="/book/index/1" class="btn btn-info">К произведениям</a>
+                    <a href="/book/edit/1" class="btn btn-warning">Изменить</a>
+                    <a href="/book/remove/1" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@fat</td>
+                <td>@fat</td>
+                <td>1</td>
+                <td>
+                    <a href="/book/index/1" class="btn btn-info">К произведениям</a>
+                    <a href="/author/edit/1" class="btn btn-warning">Изменить</a>
+                    <a href="/author/remove/1" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@fat</td>
+                <td>@fat</td>
+                <td>1</td>
+                <td>
+                    <a href="/book/index/1" class="btn btn-info">К произведениям</a>
+                    <a href="/author/edit/1" class="btn btn-warning">Изменить</a>
+                    <a href="/author/remove/1" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

@@ -1,5 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    AUTHOR CREATE
+    <div class="well well-lg">
+        <h4><strong>Обязательная информация об авторе</strong></h4>
+        <br>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Фамилия</label>
+                <div class="col-sm-5">
+                    <input class="form-control" id="inputSurname" placeholder="Толстой">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Имя</label>
+                <div class="col-sm-5">
+                    <input class="form-control" id="inputName" placeholder="Лев">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Отчество</label>
+                <div class="col-sm-5">
+                    <input class="form-control" id="inputPatronymic" placeholder="Николаевич">
+                </div>
+            </div>
+        </form>
+    </div>
+    <a href="/author/success" class="btn btn-success">Добавить автора</a>
+    <br>
+    <br>
+    <div class="well well">
+        <h4><strong>Дополнительная информация</strong></h4>
+        <br>
+        <div class="alert alert-success" role="alert">
+            <b>Добавить можно только новых авторов, которых еще нет в каталоге.</b>
+        </div>
+        <div class="alert alert-warning" role="alert">
+            <b>Не уверены, если ли ваш автор в каталоге?
+            <br>
+            Посмотрите <a href="/author/index">список авторов</a>.</b>
+        </div>
+    </div>
 {% endblock %}
