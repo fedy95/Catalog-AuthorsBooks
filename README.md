@@ -14,4 +14,7 @@ Problem:
 Helpful links:
 - [Symfony 3.4.2 original documentation](https://symfony.com/doc/3.4/index.html);
 - [setup Symfony](https://symfony.com/doc/3.4/setup.html);
-- [youtube tutorial](https://www.youtube.com/watch?v=HchMW8EhWPU).
+- [youtube tutorial](https://www.youtube.com/watch?v=HchMW8EhWPU);
+- [symfony doctrine model](https://symfony.com/doc/3.4/doctrine.html);
+- [Symfony doctrine ManyToMany](https://habrahabr.ru/post/334446);
+- [twig documentation](https://twig.symfony.com/doc/2.x/).
