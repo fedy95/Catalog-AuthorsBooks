@@ -27,45 +27,23 @@
             </tr>
             </thead>
             <tbody>
+            {% for author in authors %}
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@fat</td>
-                <td>@fat</td>
+                <th scope="row">{{ author.id }}</th>
+                <td>{{ author.surname }}</td>
+                <td>{{ author.name }}</td>
+                <td>{{ author.patronymic }}</td>
+                <td>{{ author.surname }}
+                    {{ author.name|first }}.{{ author.patronymic|first }}{% if author.patronymic != null %}.{% endif %}
+                </td>
                 <td>1</td>
                 <td>
-                    <a href="/book/index/1" class="btn btn-info">К произведениям</a>
-                    <a href="/book/edit/1" class="btn btn-warning">Изменить</a>
-                    <a href="/book/remove/1" class="btn btn-danger">Удалить</a>
+                    <a href="/book/index/{{ author.id }}" class="btn btn-info">К произведениям</a>
+                    <a href="/book/edit/{{ author.id }}" class="btn btn-warning">Изменить</a>
+                    <a href="/book/remove/{{ author.id }}" class="btn btn-danger">Удалить</a>
                 </td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>1</td>
-                <td>
-                    <a href="/book/index/1" class="btn btn-info">К произведениям</a>
-                    <a href="/author/edit/1" class="btn btn-warning">Изменить</a>
-                    <a href="/author/remove/1" class="btn btn-danger">Удалить</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>1</td>
-                <td>
-                    <a href="/book/index/1" class="btn btn-info">К произведениям</a>
-                    <a href="/author/edit/1" class="btn btn-warning">Изменить</a>
-                    <a href="/author/remove/1" class="btn btn-danger">Удалить</a>
-                </td>
-            </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

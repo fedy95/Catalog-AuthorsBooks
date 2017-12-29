@@ -1,31 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="well well-lg">
-        <h4><strong>Обязательная информация об авторе</strong></h4>
-        <br>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Фамилия</label>
-                <div class="col-sm-5">
-                    <input class="form-control" id="inputSurname" placeholder="Толстой">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Имя</label>
-                <div class="col-sm-5">
-                    <input class="form-control" id="inputName" placeholder="Лев">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Отчество</label>
-                <div class="col-sm-5">
-                    <input class="form-control" id="inputPatronymic" placeholder="Николаевич">
-                </div>
-            </div>
-        </form>
-    </div>
-    <a href="/author/success" class="btn btn-success">Добавить автора</a>
+    {#<div class="well well-lg">#}
+        {#<h4><strong>Обязательная информация об авторе</strong></h4>#}
+        {#<br>#}
+        {#<form class="form-horizontal">#}
+            {#<div class="form-group">#}
+                {#<label class="col-sm-2 control-label">Фамилия</label>#}
+                {#<div class="col-sm-5">#}
+                    {#{{ form_start(form) }}#}
+                {#</div>#}
+            {#</div>#}
+            {#<div class="form-group">#}
+                {#<label class="col-sm-2 control-label">Имя</label>#}
+                {#<div class="col-sm-5">#}
+                    {#{{ form_start(form) }}#}
+                {#</div>#}
+            {#</div>#}
+        {#</form>#}
+    {#</div>#}
+
+    {#<div class="well well-lg">#}
+        {#<h4><strong>Дополнительная информация об авторе</strong></h4>#}
+        {#<br>#}
+        {#<form class="form-horizontal">#}
+            {#<div class="form-group">#}
+                {#<label class="col-sm-2 control-label">Отчество</label>#}
+                {#<div class="col-sm-5">#}
+                    {#<input class="form-control" id="patronymic" placeholder="Николаевич">#}
+                {#</div>#}
+            {#</div>#}
+        {#</form>#}
+    {#</div>#}
+
+    {#<a href="/author/success" class="btn btn-success">Добавить автора</a>#}
+    <h4><strong>Информация об авторе</strong></h4>
+    <br>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
     <br>
     <br>
     <div class="well well">
