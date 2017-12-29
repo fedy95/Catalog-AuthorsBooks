@@ -133,10 +133,20 @@ class AuthorController extends Controller{
     }
 
     /**
-     * @Route("/author/remove", name="author_remove")
+     * @Route("/author/remove/{id}", name="author_remove")
      */
     //TODO test
-    public function removeAction(Request $request){
-        return $this->render('author/remove.html.twig');
+    public function removeAction($id, Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $author = $em->getRepository('AppBundle:Author')->find($id);
+
+        $em->remove($author);
+        $em->flush();
+
+        $this->addFlash(
+            'notice',
+            'Автор удален из каталога'
+        );
+        return $this->redirectToRoute('author_list');
     }
 }
