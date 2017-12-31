@@ -3,12 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Book
  *
  * @ORM\Table(name="book")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BookRepository")
+ * @UniqueEntity(fields={"name","yearPublication"}, message="Эта книга уже добавлена в каталог")
+ * @UniqueEntity(fields={"iSBN"}, message="Эта книга уже добавлена в каталог")
  */
 class Book
 {
@@ -31,7 +35,12 @@ class Book
     /**
      * @var string
      *
-     * @ORM\Column(name="fileName", type="string", length=100)
+     * @ORM\Column(name="fileName", type="string", length=255)
+     * @Assert\NotBlank(message="Пожалуйста, загрузите произведение как PDF-файл")
+     * @Assert\File(
+     *     maxSize = "50M",
+     *     mimeTypes={ "application/pdf" }
+     *     )
      */
     private $fileName;
 
@@ -50,9 +59,9 @@ class Book
     private $pageNumber;
 
     /**
-     * @var \DateTime
+     * @var int
      *
-     * @ORM\Column(name="yearPublication", type="date", nullable=true)
+     * @ORM\Column(name="yearPublication", type="integer", nullable=true)
      */
     private $yearPublication;
 
@@ -60,6 +69,10 @@ class Book
      * @var string
      *
      * @ORM\Column(name="imageName", type="string", length=100, nullable=true)
+     * @Assert\Image(
+     *     maxSize = "3M",
+     *     mimeTypes={"image/jpeg", "image/png"}
+     *     )
      */
     private $imageName;
 

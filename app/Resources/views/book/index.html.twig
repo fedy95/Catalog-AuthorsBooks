@@ -28,48 +28,27 @@
             </tr>
             </thead>
             <tbody>
+            {% for book in books %}
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>1</td>
-                <td>Изображение</td>
+                <th scope="row">{{ book.id }}</th>
+                <td>{{ book.name }}</td>
+                <td> book author </td>
+                <td>{{ book.pageNumber }}</td>
+                <td>{{ book.yearPublication }}</td>
+                <td>{{ book.ISBN }}</td>
+                <td><img src="{{ asset('/web/_files/image/' ~ book.imageName)}}" alt=book.imageName/>
+                    <img src="/web/_files/image/network.jpg" alt="Symfony!"/>
+                    <img src="{{ '/web/_files/image/' ~ book.imageName}}"/>
+                    <img src="{{ '/web/_files/image/' ~ book.imageName}}"/>
+                    <img src="{{ '/web/_files/image/' ~ book.imageName}}"/>
+                </td>
                 <td>
-                    <a href="/book/index/1" class="btn btn-info">К произведению</a>
-                    <a href="/book/edit/1" class="btn btn-warning">Изменить</a>
-                    <a href="/book/remove/1" class="btn btn-danger">Удалить</a>
+                    <a href="/book/index/{{ book.id }}" class="btn btn-info">К произведению</a>
+                    <a href="/book/edit/{{ book.id }}" class="btn btn-warning">Изменить</a>
+                    <a href="/book/remove/{{ book.id }}" class="btn btn-danger">Удалить</a>
                 </td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>1</td>
-                <td>Изображение</td>
-                <td>
-                    <a href="/book/index/1" class="btn btn-info">К произведению</a>
-                    <a href="/book/edit/1" class="btn btn-warning">Изменить</a>
-                    <a href="/book/remove/1" class="btn btn-danger">Удалить</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@fat</td>
-                <td>@fat</td>
-                <td>1</td>
-                <td>Изображение</td>
-                <td>
-                    <a href="/book/index/1" class="btn btn-info">К произведению</a>
-                    <a href="/book/edit/1" class="btn btn-warning">Изменить</a>
-                    <a href="/book/remove/1" class="btn btn-danger">Удалить</a>
-                </td>
-            </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
