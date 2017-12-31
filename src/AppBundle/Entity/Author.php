@@ -128,6 +128,12 @@ class Author
         return $this->patronymic;
     }
 
+    //for BookType class
+    public function __toString()
+    {
+        return $this->getSurname() . ' ' . $this->getName() . ' ' . $this->getPatronymic();
+    }
+
     //ManyToMany
     /**
      * @ORM\ManyToMany(targetEntity="Book", inversedBy="authors")
