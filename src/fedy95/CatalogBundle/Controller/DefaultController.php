@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('fedy95CatalogBundle:Default:index.html.twig');
+        return $this->render('@fedy95Catalog/Default/index.html.twig');
     }
 }

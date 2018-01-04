@@ -5,6 +5,8 @@ namespace fedy95\CatalogBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class AuthorType extends AbstractType
 {
@@ -13,7 +15,35 @@ class AuthorType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('surname')->add('patronymic');
+        $builder
+            ->add('surname', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'margin-bottom:15px;',
+                ],
+                'label' => 'Фамилия'
+            ])
+            ->add('name', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'margin-bottom:15px;',
+                ],
+                'label' => 'Имя'
+            ])
+            ->add('patronymic', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'margin-bottom:25px;',
+                ],
+                'label' => 'Отчество',
+                'required' => false
+            ])
+            ->add('Save', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-warning',
+                    'style' => 'margin-bottom:5px'],
+                'label' => 'Внести изменения'
+            ]);
     }
     
     /**

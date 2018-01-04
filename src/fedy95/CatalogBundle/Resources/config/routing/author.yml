@@ -21,4 +21,4 @@ author_edit:
 author_delete:
     path:     /{id}/delete
     defaults: { _controller: "fedy95CatalogBundle:Author:delete" }
-    methods:  DELETE
+    methods:  GET

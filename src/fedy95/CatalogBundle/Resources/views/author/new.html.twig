@@ -1,0 +1,23 @@
+{% extends '@fedy95Catalog/base.html.twig' %}
+
+{% block body %}
+    <h3><strong>Добавить автора</strong></h3>
+    <br>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <br>
+    <br>
+    <div class="well well">
+        <h4><strong>Дополнительная информация</strong></h4>
+        <br>
+        <div class="alert alert-success" role="alert">
+            <b>Добавить можно только новых авторов, которых еще нет в каталоге.</b>
+        </div>
+        <div class="alert alert-warning" role="alert">
+            <b>Не уверены, если ли ваш автор в каталоге?
+                <br>
+                Посмотрите <a href="/author/">список авторов</a>.</b>
+        </div>
+    </div>
+{% endblock %}

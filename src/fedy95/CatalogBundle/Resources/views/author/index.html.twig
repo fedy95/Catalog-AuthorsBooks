@@ -1,0 +1,46 @@
+{% extends '@fedy95Catalog/base.html.twig' %}
+
+{% block body %}
+    <h3><strong>Авторы в каталоге</strong></h3>
+    <br>
+    <a href="{{ path('author_new')}}" class="btn btn-success">Добавить автора</a>
+    <br>
+    <br>
+    {#<form class="form-inline">#}
+        {#<input type="text" class="form-control" placeholder="Поиск по автору">#}
+        {#<a href="/book/index/1" class="btn btn-default">Поиск</a>#}
+    {#</form>#}
+    <div class="bs-example" data-example-id="striped-table">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Фамилия И.О.</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for author in authors %}
+                <tr>
+                    <th scope="row">{{ author.id }}</th>
+                    <td>{{ author.surname }}</td>
+                    <td>{{ author.name }}</td>
+                    <td>{{ author.patronymic }}</td>
+                    <td>{{ author.surname }}
+                        {{ author.name|first }}.{{ author.patronymic|first }}{% if author.patronymic != null %}.{% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('author_show', { 'id': author.id })}}" class="btn btn-info">К произведениям</a>
+                        <a href="{{ path('author_edit', { 'id': author.id })}}" class="btn btn-warning">Изменить</a>
+                        <a href="{{ path('author_delete', { 'id': author.id })}}" class="btn btn-danger">Удалить</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
