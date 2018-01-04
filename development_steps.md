@@ -138,3 +138,248 @@ Field length [255]: 100
 Is nullable [false]: true
 Unique [false]:
 ```
+
+**10) Generate entity *Book*:**
+```shell
+php bin/console doctrine:generate:entity
+The Entity shortcut name: fedy95CatalogBundle:Book
+Configuration format (yml, xml, php, or annotation) [annotation]:
+New field name (press <return> to stop adding fields): title
+Field type [string]:
+Field length [255]: 100
+Is nullable [false]:
+Unique [false]:
+
+New field name (press <return> to stop adding fields): fileName
+Field type [string]:
+Field length [255]: 100
+Is nullable [false]:
+Unique [false]:
+
+New field name (press <return> to stop adding fields): ISBN
+Field type [string]:
+Field length [255]: 30
+Is nullable [false]: true
+Unique [false]:
+
+New field name (press <return> to stop adding fields): pageNumber
+Field type [string]: integer
+Is nullable [false]: true
+Unique [false]:
+
+New field name (press <return> to stop adding fields): yearPublication
+Field type [string]: integer
+Is nullable [false]: true
+Unique [false]:
+
+New field name (press <return> to stop adding fields): imageName
+Field type [string]:
+Field length [255]: 100
+Is nullable [false]: true
+Unique [false]:
+```
+**11) Update entity *Author*:**
+- Turn on unique variables:
+```php
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * Author
+ * @ORM\Table(name="author")
+ * @ORM\Entity(repositoryClass="fedy95\CatalogBundle\Repository\AuthorRepository")
+ * @UniqueEntity(fields={"surname","name", "patronymic"}, message="Этот автор уже был добавлен")
+ * @UniqueEntity(fields={"surname","name"}, message="Этот автор уже был добавлен")
+ */
+```
+- Function get full author name:
+```php
+    //for BookType class
+    public function __toString()
+    {
+        return $this->getSurname() . ' ' . $this->getName() . ' ' . $this->getPatronymic();
+    }
+```
+- Add many-to-many relations:
+```php
+//ManyToMany entity
+    /**
+     * @ORM\ManyToMany(targetEntity="Book", mappedBy="authors", cascade={"persist"})
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    private $books;
+
+    /**
+     * Doctrine\Common\Collections\Collection
+     * @return mixed
+     */
+    public function getBooks()
+    {
+        return $this->books;
+    }
+
+    /**
+     * @param mixed $books
+     */
+    public function setBooks($books)
+    {
+        $this->books = $books;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->books = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add book
+     * @param Book $book
+     * @return Author
+     */
+    public function addBook(Book $book)
+    {
+        $this->books[] = $book;
+        return $this;
+    }
+
+    /**
+     * Remove book
+     * @param Book $book
+     */
+    public function removeBook(Book $book)
+    {
+        $this->books->removeElement($book);
+    }
+```
+**12) Update entity *Book*:**
+- Turn on unique variables:
+```php
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * Book
+ *
+ * @ORM\Table(name="book")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BookRepository")
+ * @UniqueEntity(fields={"title","yearPublication"}, message="Эта книга уже добавлена в каталог")
+ * @UniqueEntity(fields={"iSBN"}, message="Эта книга уже добавлена в каталог")
+ */
+```
+
+- Files properties:
+```php
+/**
+     * @var string
+     * @ORM\Column(name="fileName", type="string", length=255)
+     * @Assert\NotBlank(message="Пожалуйста, загрузите произведение как PDF-файл")
+     * @Assert\File(
+     *     maxSize = "50M",
+     *     mimeTypes={ "application/pdf" }
+     *     )
+     */
+    private $fileName;
+    ...
+    /**
+     * @var string
+     * @ORM\Column(name="imageName", type="string", length=100, nullable=true)
+     * @Assert\Image(
+     *     maxSize = "3M",
+     *     mimeTypes={"image/jpeg", "image/png"}
+     *     )
+     */
+    private $imageName;
+```
+
+- Add many-to-many relations:
+```php
+//ManyToMany entity
+    /**
+     * @ORM\ManyToMany(targetEntity="Author", inversedBy="books", cascade={"persist"})
+     * @ORM\JoinTable(name="author_book",
+     * joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id")},
+     * inverseJoinColumns={@ORM\JoinColumn(name="author_id", referencedColumnName="id")}
+     *     )
+     */
+    private $authors;
+
+    /**
+     * Doctrine\Common\Collections\Collection
+     * @return mixed
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
+     * @param mixed $authors
+     */
+    public function setAuthors($authors)
+    {
+        $this->authors = $authors;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add author
+     * @param \AppBundle\Entity\Author $author
+     * @return Book
+     */
+    public function addAuthor(\AppBundle\Entity\Author $author)
+    {
+        $author->addBook($this);
+        $this->authors[] = $author;
+        return $this;
+    }
+
+    /**
+     * Remove author
+     * @param \AppBundle\Entity\Author $author
+     */
+    public function removeAuthor(\AppBundle\Entity\Author $author)
+    {
+        $this->authors->removeElement($author);
+    }
+```
+
+**12) Create database schema (if it's need):**
+```shell
+php bin/console doctrine:schema:create
+```
+
+**13) Insert example rows into tables (if it's need):**
+```sql
+INSERT INTO `Book` (`title`,`fileName`,`ISBN`,`pageNumber`,`yearPublication`,`imageName`) VALUES ('Компьютерные сети','Computer_Networks_2012','978-5-459-00342-0','960','2012','network.jpg');
+INSERT INTO `Book` (`title`,`fileName`,`ISBN`,`pageNumber`,`yearPublication`,`imageName`) VALUES ('Современные операционные системы','Modern_OS_2015','978-5-496-01395-6','1120','2015','systems.jpg');
+
+INSERT INTO `Author` (`name`,`surname`,`patronymic`) VALUES ('Эндрю','Таненбаум','Стюарт');
+INSERT INTO `Author` (`name`,`surname`) VALUES ('Ганс','Бос');
+INSERT INTO `Author` (`name`,`surname`) VALUES ('Дэвид','Уэзеролл');
+
+INSERT INTO `Author_Book` (`book_id`,`author_id`) VALUES ('1','1');
+INSERT INTO `Author_Book` (`book_id`,`author_id`) VALUES ('1','3');
+INSERT INTO `Author_Book` (`book_id`,`author_id`) VALUES ('2','1');
+INSERT INTO `Author_Book` (`book_id`,`author_id`) VALUES ('2','2');
+```
+
+**14) Generate Author CRUD:**
+```shell
+php bin/console generate:doctrine:crud
+The Entity shortcut name: fedy95CatalogBundle:Author
+Do you want to generate the "write" actions [no]? yes
+Configuration format (yml, xml, php, or annotation) [annotation]: yml
+Routes prefix [/author]:
+Do you confirm generation [yes]?
+Updating the routing: Confirm automatic update of the Routing [yes]?
+```
