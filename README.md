@@ -1,7 +1,7 @@
 # Catalog with Symfony3-framework
 
 ### Development step by step
-[development steps](https://github.com/fedy95/Catalog-AuthorsBooks/blob/master/development_steps.md).
+- [development steps](https://github.com/fedy95/Catalog-AuthorsBooks/blob/master/development_steps.md).
 
 ### Used software
 - Windows 10 Pro;
