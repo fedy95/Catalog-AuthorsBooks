@@ -1,0 +1,24 @@
+author_index:
+    path:     /
+    defaults: { _controller: "fedy95CatalogBundle:Author:index" }
+    methods:  GET
+
+author_show:
+    path:     /{id}/show
+    defaults: { _controller: "fedy95CatalogBundle:Author:show" }
+    methods:  GET
+
+author_new:
+    path:     /new
+    defaults: { _controller: "fedy95CatalogBundle:Author:new" }
+    methods:  [GET, POST]
+
+author_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "fedy95CatalogBundle:Author:edit" }
+    methods:  [GET, POST]
+
+author_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "fedy95CatalogBundle:Author:delete" }
+    methods:  DELETE
