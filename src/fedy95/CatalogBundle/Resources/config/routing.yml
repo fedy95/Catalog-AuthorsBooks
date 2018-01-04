@@ -1,0 +1,3 @@
+fedy95_catalog_homepage:
+    path:     /
+    defaults: { _controller: fedy95CatalogBundle:Default:index }

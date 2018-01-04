@@ -1,3 +1,7 @@
+fedy95_catalog:
+    resource: "@fedy95CatalogBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
