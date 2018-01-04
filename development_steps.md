@@ -54,44 +54,7 @@ Target Directory [src/]:
 Configuration format (annotation, yml, xml, php) [annotation]: yml
 ```
 
-**6) Delete AppBundle:**
-- remove folder AppBundle from src/
-- remove string *"new AppBundle\AppBundle()"* in app/AppKernel.php
-- copy to src/fedy95/CatalogBundle/Resources/views and remove folder default (or all files) from app/Resources/views
-- remove strings with AppBundle from:
-```yml
-### app/config/routing.yml
-
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
-```
-```yml
-### app/config/services.yml
-
-# makes classes in src/AppBundle available to be used as services
-  # this creates a service per class whose id is the fully-qualified class name
-  AppBundle\:
-      resource: '../../src/AppBundle/*'
-      # you can exclude directories or files
-      # but if a service is unused, it's removed anyway
-      exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
-
-  # controllers are imported separately to make sure they're public
-  # and have a tag that allows actions to type-hint services
-  AppBundle\Controller\:
-      resource: '../../src/AppBundle/Controller'
-      public: true
-      tags: ['controller.service_arguments']
-
-  # add more services, or override services that need manual wiring
-  # AppBundle\Service\ExampleService:
-  #     arguments:
-  #         $someArgument: 'some_value'
-```
-- remove folder AppBundle from tests/
-
-**7) Fix /composer.json (fix windows error):**
+**6) Fix /composer.json (fix windows error):**
 - Change:
 ```json
 "psr-4": {
@@ -108,19 +71,21 @@ to
 ```shell
 composer dump-autoload
 ```
-**8) Write info about database (if it's need) *, create database (if it's need)*:**
+
+**7) Write info about database (if it's need) *, create database (if it's need)*:**
 ```yml
 #app/config/parameters.yml
 
 database_name: catalog_authorsbooks
 ```
-**9) Generate entity *Author*:**
+
+**8) Generate entity *Author*:**
 ```shell
 php bin/console doctrine:generate:entity
 The Entity shortcut name: fedy95CatalogBundle:Author
 Configuration format (yml, xml, php, or annotation) [annotation]:
-New field name (press <return> to stop adding fields): name
 
+New field name (press <return> to stop adding fields): name
 Field type [string]:
 Field length [255]: 100
 Is nullable [false]:
@@ -139,7 +104,7 @@ Is nullable [false]: true
 Unique [false]:
 ```
 
-**10) Generate entity *Book*:**
+**9) Generate entity *Book*:**
 ```shell
 php bin/console doctrine:generate:entity
 The Entity shortcut name: fedy95CatalogBundle:Book
@@ -178,7 +143,7 @@ Field length [255]: 100
 Is nullable [false]: true
 Unique [false]:
 ```
-**11) Update entity *Author*:**
+**10) Update entity *Author*:**
 - Turn on unique variables:
 ```php
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -201,7 +166,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 ```
 - Add many-to-many relations:
 ```php
-//ManyToMany entity
+    //ManyToMany entity
     /**
      * @ORM\ManyToMany(targetEntity="Book", mappedBy="authors", cascade={"persist"})
      * @ORM\OrderBy({"name" = "ASC"})
@@ -252,7 +217,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
         $this->books->removeElement($book);
     }
 ```
-**12) Update entity *Book*:**
+
+**11) Update entity *Book*:**
 - Turn on unique variables:
 ```php
 use Doctrine\Common\Collections\ArrayCollection;
@@ -264,7 +230,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * Book
  *
  * @ORM\Table(name="book")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BookRepository")
+ * @ORM\Entity(repositoryClass="fedy95\CatalogBundle\Repository\BookRepository")
  * @UniqueEntity(fields={"title","yearPublication"}, message="Эта книга уже добавлена в каталог")
  * @UniqueEntity(fields={"iSBN"}, message="Эта книга уже добавлена в каталог")
  */
@@ -333,10 +299,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
     /**
      * Add author
-     * @param \AppBundle\Entity\Author $author
+     * @param AuthorRepository $author
      * @return Book
      */
-    public function addAuthor(\AppBundle\Entity\Author $author)
+    public function addAuthor(AuthorRepository $author)
     {
         $author->addBook($this);
         $this->authors[] = $author;
@@ -345,9 +311,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
     /**
      * Remove author
-     * @param \AppBundle\Entity\Author $author
+     * @param AuthorRepository $author
      */
-    public function removeAuthor(\AppBundle\Entity\Author $author)
+    public function removeAuthor(AuthorRepository $author)
     {
         $this->authors->removeElement($author);
     }
@@ -382,4 +348,279 @@ Configuration format (yml, xml, php, or annotation) [annotation]: yml
 Routes prefix [/author]:
 Do you confirm generation [yes]?
 Updating the routing: Confirm automatic update of the Routing [yes]?
+```
+
+**15) Update Author-DefaultControllers and templates:**
+```yml
+#Resources/config/routing/author.yml
+author_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "fedy95CatalogBundle:Author:delete" }
+    methods:  GET
+```
+
+```php
+//Form/AuthorType.php
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('surname', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'margin-bottom:15px;',
+                ],
+                'label' => 'Фамилия'
+            ])
+            ->add('name', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'margin-bottom:15px;',
+                ],
+                'label' => 'Имя'
+            ])
+            ->add('patronymic', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'margin-bottom:25px;',
+                ],
+                'label' => 'Отчество',
+                'required' => false
+            ])
+            ->add('Save', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-warning',
+                    'style' => 'margin-bottom:5px'],
+                'label' => 'Внести изменения'
+            ]);
+    }
+```
+- move autogenerated author templalates from */app/Resources/views* to */src/fedy95/CatalogBundle/Resources/views*
+
+- update base.html.twig
+- update Default/index.html.twig
+- update author/edit.html.twig
+- update author/index.html.twig
+- update author/new.html.twig
+- update author/show.html.twig
+
+- update DefaultController
+- update AuthorController
+```php
+//example render view
+@fedy95Catalog/author/index.html.twig
+```
+
+```php
+//AuthorController
+public function deleteAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $author = $em->getRepository('fedy95CatalogBundle:Author')->find($id);
+        $em->remove($author);
+        $em->flush();
+        $this->addFlash(
+            'notice',
+            'Автор удален из каталога'
+        );
+        return $this->redirectToRoute('author_index');
+    }
+```
+
+**16) Generate Book CRUD:**
+```shell
+php bin/console generate:doctrine:crud
+The Entity shortcut name: fedy95CatalogBundle:Book
+Do you want to generate the "write" actions [no]? yes
+Configuration format (yml, xml, php, or annotation) [annotation]: yml
+Routes prefix [/author]:
+Do you confirm generation [yes]?
+Updating the routing: Confirm automatic update of the Routing [yes]?
+```
+
+```yml
+#src/fedy95/CatalogBundle/Resources/config/routing.yml
+fedy95_catalog_book:
+    resource: "@fedy95CatalogBundle/Resources/config/routing/book.yml"
+    prefix:   /book
+```
+
+**17) Update BookController and templates:**
+```yml
+#Resources/config/routing/book.yml
+book_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "fedy95CatalogBundle:Book:delete" }
+    methods:  GET
+```
+
+```yml
+#app/config/config.yml:
+parameters:
+    locale: en
+    books_directory: '%kernel.project_dir%/web/uploads/books'
+    images_directory: '%kernel.project_dir%/web/uploads/images'
+```
+
+```php
+use fedy95\CatalogBundle\Form\AuthorType;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('title', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'margin-bottom:15px;',
+                ],
+                'label' => 'Название',
+                'data_class' => null
+            ])
+            ->add('fileName', FileType::class, array('data_class' => null), [
+                'attr' => [
+                    'class' => 'file',
+                    'style' => 'margin-bottom:15px;',
+                    'data-allowed-file-extensions' => '["pdf"]'
+                ],
+                'label' => 'Произведение в формате PDF (не более 50 Мб)'
+            ])
+            ->add('pageNumber', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'margin-bottom:15px;'
+                ],
+                'label' => 'Количество страниц',
+                'required' => false
+            ])
+            ->add('yearPublication', IntegerType::class, [
+                'attr' => [
+                    'min' => '1400', 'max' => date('Y'),
+                    'class' => 'form-control',
+                    'style' => 'margin-bottom:15px'
+                ],
+                'label' => 'Год публикации',
+                'required' => false
+            ])
+            ->add('ISBN', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'margin-bottom:15px;'
+                ],
+                'label' => 'Международный номер книги',
+                'required' => false
+            ])
+            ->add('imageName', FileType::class, array('data_class' => null), [
+                'attr' => [
+                    'class' => 'file',
+                    'style' => 'margin-bottom:15px;',
+                    'data-allowed-file-extensions' => '["jpg", "png"]'
+                ],
+                'label' => 'Изображение в формате JPG или PNG (не более 3 Мб)',
+                'required' => false
+            ])
+            ->add('authors', EntityType::class, [
+                'attr' => [
+                    'multiple class' => 'form-control',
+                    'style' => 'margin-bottom:25px'],
+                'label' => 'Авторы произведения',
+                'class' => Author::class,
+                'expanded' => true,
+                'multiple' => true,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')->orderBy('c.surname');
+                }
+            ])
+            ->add('Save', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-warning',
+                    'style' => 'margin-bottom:5px'],
+                'label' => 'Внести изменения'
+            ]);
+    }
+```
+
+```php
+//AuthorController
+public function newAction(Request $request)
+    {
+        $book = new Book();
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $book */
+            $file = $book->getFileName();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('books_directory'),
+                $fileName
+            );
+            $book->setFileName($fileName);
+
+            /** @var UploadedFile $image */
+            if ($book->getImageName() !== null) {
+                $file = $book->getImageName();
+                $imageName = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move(
+                    $this->getParameter('images_directory'),
+                    $imageName
+                );
+                $book->setImageName($imageName);
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($book);
+            $em->flush();
+            return $this->redirect($this->generateUrl('book_index'));
+        }
+        return $this->render('@fedy95Catalog/book/new.html.twig', array(
+            'book' => $book,
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function editAction(Request $request, Book $book)
+    {
+        $deleteForm = $this->createDeleteForm($book);
+        $editForm = $this->createForm('fedy95\CatalogBundle\Form\BookType', $book);
+        $editForm->handleRequest($request);
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            /** @var UploadedFile $book */
+            $file = $book->getFileName();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('books_directory'),
+                $fileName
+            );
+            $book->setFileName($fileName);
+
+            /** @var UploadedFile $image */
+            if ($book->getImageName() !== null) {
+                $file = $book->getImageName();
+                $imageName = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move(
+                    $this->getParameter('images_directory'),
+                    $imageName
+                );
+                $book->setImageName($imageName);
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($book);
+            $em->flush();
+            return $this->redirectToRoute('book_index', array('id' => $book->getId()));
+        }
+        return $this->render('@fedy95Catalog/book/edit.html.twig', array(
+            'book' => $book,
+            'edit_form' => $editForm->createView(),
+        ));
+    }
 ```
