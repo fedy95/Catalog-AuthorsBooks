@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * Book
  *
  * @ORM\Table(name="book")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BookRepository")
+ * @ORM\Entity(repositoryClass="fedy95\CatalogBundle\Repository\BookRepository")
  * @UniqueEntity(fields={"title","yearPublication"}, message="Эта книга уже добавлена в каталог")
  * @UniqueEntity(fields={"iSBN"}, message="Эта книга уже добавлена в каталог")
  */
