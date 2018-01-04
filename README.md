@@ -1,6 +1,8 @@
 # Catalog-AuthorsBooks
 PHP symfony framework tested
 
+[development steps](https://github.com/fedy95/Catalog-AuthorsBooks/blob/master/development_steps.md)
+
 Used software:
 - Apache 2.4.29;
 - mysqlnd 5.0.12-dev;
