@@ -5,8 +5,7 @@
     <br>
     <br>
     <a href="{{ path('author_edit', { 'id': author.id }) }}" class="btn btn-warning">Изменить</a>
-    <a href="{{ path('author_delete', { 'id': author.id }) }}" class="btn btn-danger">Удалить</a>
-
+    <a href="{{ path('author_delete', { 'id': author.id }) }}" class="btn btn-danger">Удалить</a>>
     <br>
     <br>
     <h4>Произведения автора</h4>
@@ -14,12 +13,25 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>#</th>
+                <th>Название</th>
+                <th>Авторы</th>
+                <th>Количество страниц</th>
+                <th>Год публикации</th>
+                <th>ISBN</th>
+                <th>Файл</th>
             </tr>
             </thead>
             <tbody>
+            {#{% for book in books %}#}
             <tr>
+                {#<td>{{ author.books }}</td>#}
+                {#<td> {% for books in book.authors %} <li>{{ books }} </li> {% endfor %} </td>#}
+                {#<td>{{ book.pageNumber }}</td>#}
+                {#<td>{{ book.yearPublication }}</td>#}
+                {#<td>{{ book.ISBN }}</td>#}
+                {#<td><a href="{{ asset('uploads/books/' ~ book.fileName)}}">PDF</a></td>#}
             </tr>
+            {#{% endfor %}#}
             </tbody>
         </table>
     </div>

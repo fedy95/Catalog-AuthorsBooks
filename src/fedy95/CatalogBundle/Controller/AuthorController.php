@@ -3,6 +3,7 @@
 namespace fedy95\CatalogBundle\Controller;
 
 use fedy95\CatalogBundle\Entity\Author;
+use fedy95\CatalogBundle\Form\AuthorType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -34,7 +35,6 @@ class AuthorController extends Controller
             $em->flush();
             return $this->redirectToRoute('author_index', array('id' => $author->getId()));
         }
-
         return $this->render('@fedy95Catalog/author/new.html.twig', array(
             'author' => $author,
             'form' => $form->createView(),
@@ -48,10 +48,8 @@ class AuthorController extends Controller
     public function showAction(Author $author)
     {
         $deleteForm = $this->createDeleteForm($author);
-
         return $this->render('@fedy95Catalog/author/show.html.twig', array(
             'author' => $author,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -70,7 +68,6 @@ class AuthorController extends Controller
         return $this->render('@fedy95Catalog/author/edit.html.twig', array(
             'author' => $author,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

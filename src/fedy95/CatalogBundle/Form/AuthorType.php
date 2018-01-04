@@ -10,9 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class AuthorType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

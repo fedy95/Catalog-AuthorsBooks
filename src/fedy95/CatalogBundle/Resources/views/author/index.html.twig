@@ -34,7 +34,7 @@
                         {{ author.name|first }}.{{ author.patronymic|first }}{% if author.patronymic != null %}.{% endif %}
                     </td>
                     <td>
-                        <a href="{{ path('author_show', { 'id': author.id })}}" class="btn btn-info">К произведениям</a>
+                        {#<a href="{{ path('author_show', { 'id': author.id })}}" class="btn btn-primary">К произведениям</a>#}
                         <a href="{{ path('author_edit', { 'id': author.id })}}" class="btn btn-warning">Изменить</a>
                         <a href="{{ path('author_delete', { 'id': author.id })}}" class="btn btn-danger">Удалить</a>
                     </td>
