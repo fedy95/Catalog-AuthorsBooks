@@ -8,6 +8,8 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    books_directory: '%kernel.project_dir%/web/uploads/books'
+    images_directory: '%kernel.project_dir%/web/uploads/images'
 
 framework:
     #esi: ~

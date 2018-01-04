@@ -1,0 +1,24 @@
+book_index:
+    path:     /
+    defaults: { _controller: "fedy95CatalogBundle:Book:index" }
+    methods:  GET
+
+book_show:
+    path:     /{id}/show
+    defaults: { _controller: "fedy95CatalogBundle:Book:show" }
+    methods:  GET
+
+book_new:
+    path:     /new
+    defaults: { _controller: "fedy95CatalogBundle:Book:new" }
+    methods:  [GET, POST]
+
+book_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "fedy95CatalogBundle:Book:edit" }
+    methods:  [GET, POST]
+
+book_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "fedy95CatalogBundle:Book:delete" }
+    methods:  GET

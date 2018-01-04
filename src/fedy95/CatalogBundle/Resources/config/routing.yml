@@ -2,6 +2,10 @@ fedy95_catalog_author:
     resource: "@fedy95CatalogBundle/Resources/config/routing/author.yml"
     prefix:   /author
 
+fedy95_catalog_book:
+    resource: "@fedy95CatalogBundle/Resources/config/routing/book.yml"
+    prefix:   /book
+
 fedy95_catalog_homepage:
     path:     /
     defaults: { _controller: fedy95CatalogBundle:Default:index }

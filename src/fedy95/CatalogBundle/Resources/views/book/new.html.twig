@@ -1,0 +1,11 @@
+{% extends '@fedy95Catalog/base.html.twig' %}
+
+{% block body %}
+    <h3><strong>Информация о произведении</strong></h3>
+    <br>
+    <br>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_row(form.authors) }}
+    {{ form_end(form) }}
+{% endblock %}

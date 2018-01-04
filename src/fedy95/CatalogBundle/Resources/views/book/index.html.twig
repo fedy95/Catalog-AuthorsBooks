@@ -1,0 +1,44 @@
+{% extends '@fedy95Catalog/base.html.twig' %}
+
+{% block body %}
+    <h3><strong>Произведения в каталоге</strong></h3>
+    <br>
+    <br>
+    <a href="{{ path('book_new')}}" class="btn btn-success">Добавить произведение</a>
+    <br>
+    <br>
+    {#<form class="form-inline">#}
+        {#<input type="text" class="form-control" placeholder="Поиск произведения">#}
+        {#<a href="/book/index/1" class="btn btn-default">Поиск</a>#}
+    {#</form>#}
+    <div class="bs-example" data-example-id="striped-table">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Название</th>
+                <th>Авторы</th>
+                <th>Количество страниц</th>
+                <th>Год публикации</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for book in books %}
+                <tr>
+                    <th scope="row">{{ book.id }}</th>
+                    <td>{{ book.title }}</td>
+                    <td> {% for books in book.authors %} <li>{{ books }} </li> {% endfor %} </td>
+                    <td>{{ book.pageNumber }}</td>
+                    <td>{{ book.yearPublication }}</td>
+                    <td>
+                        <a href="{{ path('book_show', { 'id': book.id })}}" class="btn btn-primary">К произведению</a>
+                        <a href="{{ path('book_edit', { 'id': book.id })}}" class="btn btn-warning">Изменить</a>
+                        <a href="{{ path('book_delete', { 'id': book.id })}}" class="btn btn-danger">Удалить</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

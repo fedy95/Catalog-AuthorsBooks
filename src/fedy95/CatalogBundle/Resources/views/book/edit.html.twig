@@ -1,0 +1,18 @@
+{% extends '@fedy95Catalog/base.html.twig' %}
+
+{% block body %}
+    <h3><strong>Изменить информацию о произведении</strong></h3>
+    <br>
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    {{ form_end(edit_form) }}
+    <br>
+    <br>
+    <div class="well well">
+        <h4><strong>Дополнительная информация</strong></h4>
+        <br>
+        <div class="alert alert-success" role="alert">
+            <b>Для вашего удобства текущая информация о произведении уже внесена в поля.</b>
+        </div>
+    </div>
+{% endblock %}
