@@ -15,7 +15,7 @@
   - [complete css from bootstrap cdn v3.3.6](https://www.bootstrapcdn.com/);
   - [css Bootstrap](http://getbootstrap.com/docs/3.3/css/).
   
-### Helpful links:
+### Helpful links
 - [Setup Symfony](https://symfony.com/doc/3.4/setup.html);
 - [Symfony 3.4.2 original documentation](https://symfony.com/doc/3.4/index.html);
 - [Symfony doctrine model](https://symfony.com/doc/3.4/doctrine.html);
