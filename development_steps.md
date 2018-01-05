@@ -3,13 +3,13 @@
 [Table of contents](https://github.com/fedy95/Catalog-AuthorsBooks/blob/master/README.md)
 
 ## Versions of program:
-- [version with maximum handmade](https://github.com/fedy95/Catalog-AuthorsBooks/tree/master/_handmade);
-- [version with maximum autogeneration](https://github.com/fedy95/Catalog-AuthorsBooks).
+- [first version](https://github.com/fedy95/Catalog-AuthorsBooks/tree/master/_handmade);
+- [final version](https://github.com/fedy95/Catalog-AuthorsBooks).
 
 ### History steps by step
 **1) Install [XAMPP](https://www.apachefriends.org/xampp-files/7.2.0/xampp-win32-7.2.0-0-VC15-installer.exe);**
 
-**2) Changing environment variables:**
+**2) Changing environment variables (on Windows 10 Pro):**
 - Control Panel -> System -> Additional System Parameters -> additionally (environment variables) ->
 variable Path (edit) -> (edit-add) C:\xampp\php
 
@@ -20,7 +20,7 @@ php -r "file_put_contents('symfony', file_get_contents('https://symfony.com/inst
 php symfony new Catalog-AuthorsBooks 3.4
 ```
 
-- [used for second version](https://github.com/fedy95/Catalog-AuthorsBooks):
+- [used for final version](https://github.com/fedy95/Catalog-AuthorsBooks):
 ```shell
 php -r "file_put_contents('symfony', file_get_contents('https://symfony.com/installer'));"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
