@@ -61,19 +61,20 @@ class BookType extends AbstractType
                 'label' => 'Международный номер книги',
                 'required' => false
             ])
-            ->add('imageName', FileType::class, array('data_class' => null), [
+            ->add('imageName', FileType::class, [
                 'attr' => [
                     'class' => 'file',
                     'style' => 'margin-bottom:15px;',
                     'data-allowed-file-extensions' => '["jpg", "png"]'
                 ],
                 'label' => 'Изображение в формате JPG или PNG (не более 3 Мб)',
+                'data_class' => null,
                 'required' => false
             ])
             ->add('authors', EntityType::class, [
-                'attr' => [
-                    'multiple class' => 'form-control',
-                    'style' => 'margin-bottom:25px'],
+//                'attr' => [
+//                    'multiple class' => 'form-control',
+//                    'style' => 'margin-bottom:25px'],
                 'label' => 'Авторы произведения',
                 'class' => Author::class,
                 'expanded' => true,
