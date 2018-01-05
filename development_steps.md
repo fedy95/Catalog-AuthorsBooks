@@ -9,7 +9,7 @@
 ### History steps by step
 **1) Install [XAMPP](https://www.apachefriends.org/xampp-files/7.2.0/xampp-win32-7.2.0-0-VC15-installer.exe);**
 
-**2) Changing environment variables:**
+**2) Changing environment variables (on Windows 10 Pro):**
 - Control Panel -> System -> Additional System Parameters -> additionally (environment variables) ->
 variable Path (edit) -> (edit-add) C:\xampp\php
 
