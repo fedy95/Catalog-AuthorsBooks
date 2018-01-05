@@ -628,3 +628,13 @@ public function newAction(Request $request)
         ));
     }
 ```
+
+**17) frontend:**
+```yml
+# Twig Configuration
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    form_themes:
+            - 'bootstrap_3_layout.html.twig'
+```
