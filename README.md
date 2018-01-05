@@ -31,4 +31,4 @@
 
 ### Problem
 
-![problem](https://github.com/fedy95/Catalog-AuthorsBooks/blob/master/_Diagrams/UseCase%20(detailed).jpg)
+![problem](https://github.com/fedy95/Catalog-AuthorsBooks/blob/master/_Diagrams/UseCase%20(detailed).png)
