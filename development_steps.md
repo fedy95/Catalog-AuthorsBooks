@@ -324,6 +324,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 php bin/console doctrine:schema:create
 ```
 
+Result:
+
+![database](https://github.com/fedy95/Catalog-AuthorsBooks/blob/master/_Diagrams/DataBase.jpg)
+
 **13) Insert example rows into tables (if it's need):**
 ```sql
 INSERT INTO `Book` (`title`,`fileName`,`ISBN`,`pageNumber`,`yearPublication`,`imageName`) VALUES ('Компьютерные сети','Computer_Networks_2012','978-5-459-00342-0','960','2012','network.jpg');
@@ -623,4 +627,14 @@ public function newAction(Request $request)
             'edit_form' => $editForm->createView(),
         ));
     }
+```
+
+**17) frontend:**
+```yml
+# Twig Configuration
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    form_themes:
+            - 'bootstrap_3_layout.html.twig'
 ```
