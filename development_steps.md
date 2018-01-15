@@ -3,7 +3,6 @@
 [Table of contents](https://github.com/fedy95/Catalog-AuthorsBooks/blob/master/README.md)
 
 ## Versions of program:
-- [first version](https://github.com/fedy95/Catalog-AuthorsBooks/tree/master/_handmade);
 - [final version](https://github.com/fedy95/Catalog-AuthorsBooks).
 
 ### History steps by step
