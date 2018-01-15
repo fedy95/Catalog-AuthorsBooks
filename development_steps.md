@@ -13,7 +13,7 @@
 variable Path (edit) -> (edit-add) C:\xampp\php
 
 **3) Two installation paths:**
-- [used for first version](https://github.com/fedy95/Catalog-AuthorsBooks/tree/master/_handmade):
+- used for first version:
 ```shell
 php -r "file_put_contents('symfony', file_get_contents('https://symfony.com/installer'));"
 php symfony new Catalog-AuthorsBooks 3.4
