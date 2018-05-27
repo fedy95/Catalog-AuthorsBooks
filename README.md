@@ -15,7 +15,7 @@
 - Web-server:
   - Apache 2.4.29;
   - mysqlnd 5.0.12-dev;
-  - PHP: 7.2.0.
+  - PHP: 5.5.9.
 - IDE: 
   - PHPStorm 2017.3.2.
   
